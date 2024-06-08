@@ -1,16 +1,20 @@
-import { useEffect } from 'react';
-import ProductCard from '../components/ProductCard'
-import useProduct from '../hooks/useProduct'
 
-export default function ProductPage() {
-    const { allProduct } = useProduct();
+export default function ProductSneakerPage() {
     useEffect(() => {
         window.scrollTo(0, 0);
+        const fetchSneaker = async() => {
+            try {
+                
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchSneaker();
     }, []);
     return (
         <>
             <div className="flex flex-col my-[50px] justify-center items-center gap-[50px]">
-                <div className="text-[30px] font-bold w-fit">PRODUCTS</div>
+                <div className="text-[30px] font-bold w-fit">SNEAKER</div>
                 <div className="w-fit grid grid-cols-3 gap-20 justify-center">
                     {allProduct?.map(item => <ProductCard 
                     key={item.id} 

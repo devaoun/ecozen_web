@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.png'
 import authApi from '../apis/auth';
-import useAuth from '../hooks/useAuth';
+import { useState } from 'react';
 
 export default function AuthPage() {
-    const { email, setEmail } = useAuth()
+    const [input, setInput] = useState('')
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         try {
             e.preventDefault()
-            const res = await authApi.isUser(email)
-            localStorage.setItem('email', email)
+            const res = await authApi.isUser(input)
+            localStorage.setItem('email', input)
             if (res.data.message === 'not found') {
                 navigate('/register')
             }
@@ -23,7 +23,7 @@ export default function AuthPage() {
         }
     }
     const handleChangeInput = (e) => {
-        setEmail(e.target.value)
+        setInput(e.target.value)
     }
 
     return (
@@ -37,7 +37,7 @@ export default function AuthPage() {
                 <input
                     className='mt-[40px] p-[20px] w-[520px] border-[1px] border-gray-500 rounded-[10px] text-[30px] font-normal'
                     placeholder='Enter your email'
-                    value={email}
+                    value={input}
                     onChange={handleChangeInput}
                 />
                 <div className='mt-[20px] text-[18px] font-normal w-[520px] h-fit'>

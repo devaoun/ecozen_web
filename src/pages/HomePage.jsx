@@ -2,29 +2,29 @@ import React from 'react'
 import adHome from '../assets/adHomepage.jpg'
 import modelSneaker from '../assets/model-sneaker.png'
 import modelSport from '../assets/model-sport.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function HomePage() {
     return (
         <div className='min-h-[80vh] m-auto border-2'>
-            <div>
-                <img src={adHome} />
-            </div>
+            <Link to='/product'>
+                <img className='w-full' src={adHome} />
+            </Link>
             <div className=' bg-ec-home-gray flex flex-col p-[35px] h-fit'>
                 <div className=' opacity-50  w-fit font-normal mx-auto text-[15px]'>START SHOPPING</div>
                 <div className=' w-fit font-bold mx-auto my-[20px] text-[20px]'>CHOOSE A MODEL</div>
                 <div className='w-[1000px] h-fit mx-auto my-[60px] flex justify-between'>
-                    <Link to = '/product/sneaker'>
-                    <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70'>
-                        <img src={modelSneaker} />
-                        <div className=' text-[30px] w-fit h-fit font-extralight mx-auto'>SNEAKERS</div>
-                    </button>
+                    <Link to='/product/sneaker'>
+                        <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70'>
+                            <img src={modelSneaker} />
+                            <div className=' text-[30px] w-fit h-fit font-extralight mx-auto'>SNEAKERS</div>
+                        </button>
                     </Link>
-                    <Link to = '/product/sport'>
-                    <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70'>
-                        <img src={modelSport} />
-                        <div className=' text-[30px] w-fit h-fit font-extralight mx-auto'>SPORTS</div>
-                    </button>
+                    <Link to='/product/sport'>
+                        <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70'>
+                            <img src={modelSport} />
+                            <div className=' text-[30px] w-fit h-fit font-extralight mx-auto'>SPORTS</div>
+                        </button>
                     </Link>
                 </div>
             </div>

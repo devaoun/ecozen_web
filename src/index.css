@@ -7,3 +7,7 @@
 :root {
   font-family: "Roboto","IBM Plex Sans Thai";
 }
+
+Link:hover{
+  text-decoration: 1px;
+}

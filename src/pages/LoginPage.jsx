@@ -2,28 +2,28 @@ import { useState } from 'react'
 import logo from '../assets/Logo.png'
 import authApi from '../apis/auth'
 import { useNavigate } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 
 export default function LoginPage() {
     const email = localStorage.getItem('email')
     const [password,setPassword] = useState('')
     const navigate = useNavigate();
+    const {login} = useAuth();
 
     const handleChangePassword = (e) => {
-        setPassword(e.target.value)
+        setPassword(e.target.value);
     }
 
     const handleSubmit = async(e) => {
         try {
             e.preventDefault();
             const data = { email : email , password : password}
-            const res = await authApi.login(data)
-            if(res.data.message === 'login success'){
-                navigate('/home')
-                alert('Login success')
-            } 
+            await login(data);
+            navigate('/');
+            alert('login success');
         } catch (error) {
-            console.log(error)
-            alert('invalid password')
+            console.log(error);
+            alert('invalid password');
         }
     }
 
