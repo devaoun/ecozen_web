@@ -25,9 +25,9 @@ export default function ProductContextProvider({ children }) {
         fetchAllProduct();
     }, [])
 
-    const selectProduct = async (productId) => {
+    const selectProduct = async (productName) => {
         try {
-            setSelectedProduct(productId)
+            setSelectedProduct(productName)
             // const res = await productApi.getProductById(productId)
             // setSelectedProduct(res.data.selectedProduct)
         } catch (error) {

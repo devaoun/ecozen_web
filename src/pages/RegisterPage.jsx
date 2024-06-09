@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.png'
-import useAuth from '../hooks/useAuth'
 import authApi from '../apis/auth'
 
 
@@ -17,6 +16,13 @@ export default function RegisterPage() {
     const [input, setInput] = useState(initial_input);
     const navigate = useNavigate()
     const email = localStorage.getItem('email')
+
+    const inputRef = useRef(null)
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [])
 
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value })
@@ -38,14 +44,17 @@ export default function RegisterPage() {
 
     return (
         <div className='w-full h-full flex flex-col justify-center items-center'>
+            <Link to='/' className=' flex justify-center items-center flex-col'>
             <div className="w-fit h-[200px]">
                 <img src={logo} className=' h-full' />
             </div>
             <div className='font-bold text-[60px] h-fit'>ECOZEN</div>
+            </Link>
             <div className='mt-[20px] h-fit font-normal'>Let sign up</div>
             <div className='h-fit font-normal underline decoration-1'>{email}</div>
             <form className='p-[20px] flex flex-col items-center gap-[20px]' onSubmit={handleSubmit} >
                 <input
+                    ref={inputRef}
                     className='p-[20px] w-[520px] border-[1px] border-gray-500 rounded-[10px] text-[30px] font-normal'
                     placeholder='Username'
                     name="username"

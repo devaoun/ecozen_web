@@ -12,6 +12,9 @@ import ProductContextProvider from "../contexts/ProductContext";
 import ProtectedProduct from "../components/ProtectedProduct";
 import ProductSneakerPage from "../pages/ProductSneakerPage";
 import ProductSportPage from "../pages/ProductSportPage";
+import ProfilePage from "../pages/ProfilePage";
+import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
 
 
 
@@ -27,16 +30,13 @@ const router = createBrowserRouter([
         ),
         children: [
             { path: '/', element: <HomePage /> },
-            {
-                path: '/product', element: (
-                    <ProtectedProduct>
-                        <ProductPage />
-                    </ProtectedProduct>
-                )
-            },
+            { path: '/product', element: (<ProductPage />) },
             { path: 'product/productInfo', element: <ProductInfoPage /> },
-            { path: '/product/sneaker', element: <ProductSneakerPage/> },
-            { path: '/product/sport', element: <ProductSportPage/> }
+            { path: '/product/sneaker', element: <ProductSneakerPage /> },
+            { path: '/product/sport', element: <ProductSportPage /> },
+            { path: '/profile', element: <ProfilePage /> },
+            { path: '/cart', element: <CartPage /> },
+            { path: '/checkout', element: <CheckoutPage /> }
         ]
     },
     {

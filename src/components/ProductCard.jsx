@@ -7,7 +7,7 @@ export default function ProductCard({ id, name, model, color, price, image }) {
   const { selectProduct } = useProduct();
 
   const handleSelectProduct = () => {
-    selectProduct(id)
+    selectProduct(name)
     navigate('/product/productInfo')
   }
 
@@ -21,7 +21,7 @@ export default function ProductCard({ id, name, model, color, price, image }) {
           <div className='flex flex-col gap-[20px] h-fit w-fit'>
             <div className=' font-bold text-xl'>{name}</div>
             <div>{model}</div>
-            <div>{color}</div>
+            <div>WHITE , BLACK</div>
             <div>THB {price}</div>
           </div>
         </div>

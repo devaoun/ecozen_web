@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.png'
-import { IconCart, IconProfile } from '../assets/icons/icon'
+import { IconCart, IconLogout } from '../assets/icons/icon'
 import useAuth from '../hooks/useAuth'
 
 export default function Header() {
@@ -16,17 +16,17 @@ export default function Header() {
                 </div>
                 <Link to='/' className='w-1/3 text-center text-[40px]'>ECOZEN</Link>
                 <div className='flex gap-[30px] w-1/3 justify-end items-center'>
-                    <Link to='/' className='hover:underline flex gap-3 items-center'>
-                        <div className='h-fit w-fit'>{authUser?.username}</div>
-                        <div><IconProfile className='w-[40px] h-[40px]' /></div>
-                    </Link>
-                    <Link to='/'><IconCart className='w-[40px] h-[40px]' /></Link>
+                    <Link to={authUser ? '/profile' : '/auth'}><div className='h-fit w-fit hover:underline'>{authUser ? authUser?.username : 'login'}</div></Link>
+                    <Link to='/cart'><IconCart className='w-[40px] h-[40px]' /></Link>
                     {authUser ? <button className='h-fit w-fit hover:underline' onClick={() => {
-                        logout();
-                        navigate('/auth')
-                    }}>logout</button>
-                    : null
-                }
+                        const isConfirm = confirm('Confirm log out?')
+                        if (isConfirm) {
+                            logout();
+                            navigate('/auth')
+                        }
+                    }}><IconLogout className="w-[40px] h-[40px]" /></button>
+                        : null
+                    }
                 </div>
             </div>
         </>

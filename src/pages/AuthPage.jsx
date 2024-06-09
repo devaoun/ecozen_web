@@ -1,17 +1,28 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.png'
 import authApi from '../apis/auth';
 import { useState } from 'react';
+import Input from '../components/Input';
+import validateEmail from '../validators/validate-auth';
 
 export default function AuthPage() {
     const [input, setInput] = useState('')
     const navigate = useNavigate();
+    const [inputError, setInputError] = useState('')
 
     const handleSubmit = async (e) => {
         try {
             e.preventDefault()
+
+            const error = validateEmail(input);
+
+            if (error) {
+                return setInputError(error);
+            }
+
             const res = await authApi.isUser(input)
             localStorage.setItem('email', input)
+
             if (res.data.message === 'not found') {
                 navigate('/register')
             }
@@ -24,21 +35,25 @@ export default function AuthPage() {
     }
     const handleChangeInput = (e) => {
         setInput(e.target.value)
+
     }
 
     return (
         <div className='w-full h-full flex flex-col justify-center items-center'>
-            <div className="w-fit h-[200px]">
-                <img src={logo} className=' h-full' />
-            </div>
-            <div className='font-bold text-[60px] h-fit'>ECOZEN</div>
+            <Link to='/' className=' flex justify-center items-center flex-col'>
+                <div className="w-fit h-[200px]">
+                    <img src={logo} className=' h-full' />
+                </div>
+                <div className='font-bold text-[60px] h-fit'>ECOZEN</div>
+            </Link>
             <div className='mt-[40px] h-fit font-normal'>Enter your email to join us or sign in.</div>
             <form className=' flex flex-col items-center' onSubmit={handleSubmit}>
-                <input
-                    className='mt-[40px] p-[20px] w-[520px] border-[1px] border-gray-500 rounded-[10px] text-[30px] font-normal'
-                    placeholder='Enter your email'
+                <Input
+                    placeholder="Enter your email"
                     value={input}
                     onChange={handleChangeInput}
+                    name="email"
+                    error={inputError}
                 />
                 <div className='mt-[20px] text-[18px] font-normal w-[520px] h-fit'>
                     การดำเนินการต่อหมายความว่าฉันยอมรับ

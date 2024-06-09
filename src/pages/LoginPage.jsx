@@ -1,29 +1,30 @@
 import { useState } from 'react'
 import logo from '../assets/Logo.png'
-import authApi from '../apis/auth'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
+import Input from '../components/Input'
 
 export default function LoginPage() {
     const email = localStorage.getItem('email')
-    const [password,setPassword] = useState('')
+    const [password, setPassword] = useState('')
     const navigate = useNavigate();
-    const {login} = useAuth();
+    const { login } = useAuth();
+    const [error,setError] = useState('')
 
-    const handleChangePassword = (e) => {
+    const handleChangeInput = (e) => {
         setPassword(e.target.value);
     }
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-            const data = { email : email , password : password}
+            const data = { email: email, password: password }
             await login(data);
             navigate('/');
             alert('login success');
         } catch (error) {
             console.log(error);
-            alert('invalid password');
+            setError('invalid password');
         }
     }
 
@@ -36,12 +37,12 @@ export default function LoginPage() {
             <div className='mt-[20px] h-fit font-normal'>What's your password</div>
             <div className=' underline decoration-1 h-fit font-normal'>{email}</div>
             <form className=' flex flex-col items-center' onSubmit={handleSubmit}>
-                <input
-                    className='mt-[20px] p-[20px] w-[520px] border-[1px] border-gray-500 rounded-[10px] text-[30px] font-normal'
+                <Input
                     placeholder='Enter your password'
                     type="password"
                     value={password}
-                    onChange={handleChangePassword}
+                    onChange={handleChangeInput}
+                    error={error}
                 />
                 <div className='mt-[20px] text-[18px] font-normal w-[520px] h-fit'>
                     การดำเนินการต่อหมายความว่าฉันยอมรับ
