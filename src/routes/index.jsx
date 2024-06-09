@@ -10,6 +10,8 @@ import ProductInfoPage from "../pages/ProductInfoPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ProductContextProvider from "../contexts/ProductContext";
 import ProtectedProduct from "../components/ProtectedProduct";
+import ProductSneakerPage from "../pages/ProductSneakerPage";
+import ProductSportPage from "../pages/ProductSportPage";
 
 
 
@@ -33,8 +35,8 @@ const router = createBrowserRouter([
                 )
             },
             { path: 'product/productInfo', element: <ProductInfoPage /> },
-            { path: '/product/sneaker', element: (<h1>sneaker</h1>) },
-            { path: '/product/sport', element: (<h1>sport</h1>) }
+            { path: '/product/sneaker', element: <ProductSneakerPage/> },
+            { path: '/product/sport', element: <ProductSportPage/> }
         ]
     },
     {

@@ -4,5 +4,5 @@ const productApi = {}
 
 productApi.getAllProduct = () => axios.get('product/allProduct')
 productApi.getProductById = (productId) => axios.get(`product/${productId}`)
-productApi.getProductByModel = (productModel) => axios.get(`product/${productModel}`)
+productApi.getProductByModel = (productModel) => axios.get(`product/model/${productModel}`)
 export default productApi
