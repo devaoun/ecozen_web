@@ -44,15 +44,17 @@ export default function ProductInfoPage() {
             if (!authUser) {
                 confirm('Please login to add item to your cart.') ? navigate('/auth') : null
             }
-            const isConfirm = confirm('Confirm add product to your cart?')
-            if (isConfirm) {
-                const data = {
-                    userId : authUser?.id,
-                    productId : selectedProduct.id,
-                    size : selectedSize
+            if (authUser) {
+                const isConfirm = confirm('Confirm add product to your cart?')
+                if (isConfirm) {
+                    const data = {
+                        userId: authUser.id,
+                        productId: selectedProduct.id,
+                        size: selectedSize
+                    }
+                    const res = await cartApi.createCartItem(data)
+                    alert(res.data.message)
                 }
-                const res = await cartApi.createCartItem(data)
-                alert(res.data.message)
             }
         } catch (error) {
             console.log(error)
@@ -63,7 +65,6 @@ export default function ProductInfoPage() {
         try {
             const res = await productApi.getProductByName(getSelectedProduct())
             setSelectedProduct(res.data.productName[1])
-            console.log(selectedProduct.id)
         } catch (error) {
             console.log(error)
         }
@@ -73,7 +74,6 @@ export default function ProductInfoPage() {
         try {
             const res = await productApi.getProductByName(getSelectedProduct())
             setSelectedProduct(res.data.productName[0])
-            console.log(selectedProduct.id)
         } catch (error) {
             console.log(error)
         }

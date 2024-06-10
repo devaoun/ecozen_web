@@ -16,7 +16,6 @@ export default function CartPage() {
             try {
                 const userId = authUser.id
                 const res = await cartApi.getCartItemByUserId(userId)
-                console.log(res)
                 const data = res.data.reduce((acc, item) => {
                     acc.push({ cartId: item.id, size: item.size, ...item.product })
                     return acc
@@ -64,9 +63,9 @@ export default function CartPage() {
                             <div className="flex flex-col gap-[35px] p-[30px] border-2 h-fit rounded-[20px]">
                                 <div className=" text-[30px] font-medium">Order Info</div>
                                 <div className="flex flex-col gap-[30px] text-[20px] font-medium">
-                                    <div className="flex justify-between">Subtotal : <span>{totalPrice}</span></div>
+                                    <div className="flex justify-between">Subtotal : <span className=" font-bold">THB {totalPrice}</span></div>
                                     <div className="h-[1px] bg-ec-gray-d3d3d3" />
-                                    <div className="flex justify-between">Total Payment : <span>{totalPrice}</span></div>
+                                    <div className="flex justify-between">Total Payment : <span className=" font-bold text-2xl">THB {totalPrice}</span></div>
                                 </div>
                                 <button className=' w-[500px] h-[60px] bg-black text-white text-[25px] font-normal rounded-[100px] hover:opacity-80' onClick={handleCheckout}>CHECKOUT</button>
                             </div>

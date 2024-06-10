@@ -14,7 +14,6 @@ export default function ProductContextProvider({ children }) {
         const fetchAllProduct = async () => {
             try {
                 const res = await productApi.getAllProduct()
-                console.log(res)
                 setAllProduct(res.data.allProduct)
             } catch (error) {
                 console.log(error)

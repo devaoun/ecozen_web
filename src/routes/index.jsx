@@ -15,6 +15,7 @@ import ProductSportPage from "../pages/ProductSportPage";
 import ProfilePage from "../pages/ProfilePage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import MyAddressPage from "../pages/MyAddressPage";
 
 
 
@@ -36,7 +37,8 @@ const router = createBrowserRouter([
             { path: '/product/sport', element: <ProductSportPage /> },
             { path: '/profile', element: <ProfilePage /> },
             { path: '/cart', element: <CartPage /> },
-            { path: '/checkout', element: <CheckoutPage /> }
+            { path: '/checkout', element: <CheckoutPage /> },
+            {path:'/myAddress',element: <MyAddressPage/>}
         ]
     },
     {

@@ -14,7 +14,7 @@ export default function ProfilePage() {
             <div><IconMyOrders className=" w-[200px] h-[200px]" /></div>
             <div>My orders</div>
           </Link>
-          <Link to="/" className="flex flex-col justify-center items-center  w-fit gap-[10px] px-[50px] py-[30px] hover:shadow-2xl">
+          <Link to="/myAddress" className="flex flex-col justify-center items-center  w-fit gap-[10px] px-[50px] py-[30px] hover:shadow-2xl">
             <div><IconMyAddress className="w-[200px] h-[200px]" /></div>
             <div>My address</div>
           </Link>

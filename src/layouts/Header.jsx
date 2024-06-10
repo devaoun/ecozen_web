@@ -6,7 +6,6 @@ import useAuth from '../hooks/useAuth'
 export default function Header() {
     const { authUser, logout } = useAuth();
     const navigate = useNavigate()
-    console.log(authUser)
     return (
         <>
             <div className=' w-full h-[100px] px-[30px] py-[15px] flex justify-between items-center font-bold text-[20px] shadow'>
@@ -17,7 +16,7 @@ export default function Header() {
                 <Link to='/' className='w-1/3 text-center text-[40px]'>ECOZEN</Link>
                 <div className='flex gap-[30px] w-1/3 justify-end items-center'>
                     <Link to={authUser ? '/profile' : '/auth'}><div className='h-fit w-fit hover:underline'>{authUser ? authUser?.username : 'login'}</div></Link>
-                    <Link to='/cart'><IconCart className='w-[40px] h-[40px]' /></Link>
+                    <Link to={authUser ? '/cart' : '/auth'}><IconCart className='w-[40px] h-[40px]' /></Link>
                     {authUser ? <button className='h-fit w-fit hover:underline' onClick={() => {
                         const isConfirm = confirm('Confirm log out?')
                         if (isConfirm) {

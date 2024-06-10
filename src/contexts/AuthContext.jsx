@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getAccessToken, removeAccessToken, setAccessToken } from "../utils/localStorage";
+import { getAccessToken, removeAccessToken, removeSelectedProduct, setAccessToken } from "../utils/localStorage";
 import authApi from "../apis/auth";
 
 export const AuthContext = createContext();
@@ -8,21 +8,21 @@ export default function AuthContextProvider({ children }) {
     const [authUser, setAuthUser] = useState(null);
     const [isAuthUserLoading, setIsAuthUserLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                if (getAccessToken()) { 
-                    const accessToken = getAccessToken();
-                    const headers = {Authorization : `Bearer ${accessToken}`};
-                    const res = await authApi.getAuthUser(headers);
-                    setAuthUser(res.data.user);
-                }
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setIsAuthUserLoading(false)
+    const fetchUser = async () => {
+        try {
+            if (getAccessToken()) {
+                const accessToken = getAccessToken();
+                const headers = { Authorization: `Bearer ${accessToken}` };
+                const res = await authApi.getAuthUser(headers);
+                setAuthUser(res.data.user);
             }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsAuthUserLoading(false)
         }
+    }
+    useEffect(() => {
         fetchUser();
     }, [])
 
@@ -36,11 +36,12 @@ export default function AuthContextProvider({ children }) {
 
     const logout = () => {
         removeAccessToken();
+        removeSelectedProduct();
         setAuthUser(null);
         localStorage.removeItem('email')
     }
 
     return (
-        <AuthContext.Provider value={{ login, logout, authUser, isAuthUserLoading }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ login, logout, authUser, setAuthUser, isAuthUserLoading, fetchUser }}>{children}</AuthContext.Provider>
     )
 }
