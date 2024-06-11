@@ -1,31 +1,56 @@
 import { Link } from 'react-router-dom'
 import CheckoutItemCard from "../components/CheckoutItemCard";
+import useAuth from '../hooks/useAuth';
+import { useEffect, useState } from 'react';
+import cartApi from '../apis/cart';
+import useCart from '../hooks/useCart';
+import { LogoSCB } from '../assets/icons/icon';
 
 export default function CheckoutPage() {
+  const { authUser } = useAuth();
+  const [totalPrice, setTotalPrice] = useState(0)
+  const { cartItem } = useCart()
+
+  useEffect(() => {
+    const sumPrice = cartItem.reduce((total, item) => total + (+item.price), 0)
+    setTotalPrice(sumPrice)
+  }, [cartItem])
+
   return (
     <>
-      <div className="min-h-[80vh] flex justify-center gap-[100px] mt-[40px]">
+      <div className="min-h-[80vh] flex justify-center gap-[100px] my-[40px]">
         <div className="w-[600px] flex flex-col gap-[20px]">
           <div className=" flex flex-col gap-[20px]">
             <div className=" text-[30px] font-semibold">สรุปคำสั่งซื้อ</div>
             <div className="flex flex-col gap-[35px] p-[30px] border-2 h-fit rounded-[20px]">
               <div className=" text-[30px] font-medium">Order Info</div>
               <div className="flex flex-col gap-[30px] text-[20px] font-medium">
-                <div className="flex justify-between">Subtotal : <span className=" font-bold">THB</span></div>
+                <div className="flex justify-between">Subtotal : <span className=" font-bold">THB {totalPrice}</span></div>
                 <div className="h-[1px] bg-ec-gray-d3d3d3" />
-                <div className="flex justify-between">Total Payment : <span className=" font-bold text-2xl">THB</span></div>
+                <div className="flex justify-between">Total Payment : <span className=" font-bold text-2xl">THB {totalPrice}</span></div>
               </div>
             </div>
           </div>
-          <div className="border-2 rounded-[20px] flex flex-col items-center py-[20px] text-[20px] font-bold">
-            <div>SCB : 12-123-12121</div>
-            <div>Account name : Ecozen co.,ltd</div>
+          <div className="border-2 rounded-[20px] flex items-center justify-center gap-4 py-[20px] text-[20px] font-bold">
+            <LogoSCB className=" w-[200px] h-fit" />
+            <div>
+              <div>12-123-12121</div>
+              <div>Ecozen co.,ltd</div>
+            </div>
           </div>
           <div>
-            <div className="flex flex-col gap-[20px] mb-10">
-              <CheckoutItemCard />
-              <CheckoutItemCard />
-              <CheckoutItemCard />
+            <div className="flex flex-col gap-[20px] mb-10 h-[60vh] overflow-y-auto p-2">
+              {cartItem.map(item =>
+                <CheckoutItemCard
+                  key={item.cartId}
+                  image={item.image}
+                  cartId={item.cartId}
+                  name={item.name}
+                  size={item.size}
+                  model={item.model}
+                  price={item.price}
+                  color={item.color}
+                />)}
             </div>
           </div>
         </div>
@@ -38,10 +63,10 @@ export default function CheckoutPage() {
               </span>
             </div>
             <div className="border-2 w-full rounded-[20px] px-[30px] py-[10px] flex flex-col gap-[10px] text-[20px] font-normal">
-              <div>Firstname :</div>
-              <div>Lastname :</div>
-              <div>Phone :</div>
-              <div>Address :</div>
+              <div>Firstname : {authUser?.firstname}</div>
+              <div>Lastname : {authUser?.lastname}</div>
+              <div>Phone : {authUser?.phoneNumber}</div>
+              <div>Address : {authUser?.address}</div>
             </div>
           </div>
           <div className="flex flex-col gap-[20px] mt-[60px]">

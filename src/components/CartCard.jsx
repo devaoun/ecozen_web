@@ -17,8 +17,8 @@ export default function CartCard({color,cartId,productId,image,model,name,price,
                     <div className='flex items-center w-[200px] h-[190px] rounded-[20px] bg-ec-home-gray'>
                         <img src={image} />
                     </div>
-                    <div className='flex flex-col gap-[10px] text-[20px] font-bold h-fit'>
-                        <div>{name}</div>
+                    <div className='flex flex-col gap-[10px] text-[20px] font-normal h-fit'>
+                        <div className=' font-black'>{name}</div>
                         <div>Size : {size}</div>
                         <div>Model : {model}</div>
                         <div>Color : {color}</div>

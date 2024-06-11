@@ -31,16 +31,13 @@ export default function MyAddressPage() {
         try {
             e.preventDefault()
             const isConfirm = confirm('Update your info?')
-
             if (isConfirm) {
-
                 const error = validateProfileInfo(input);
                 if (error) {
                     return setInputError(error)
                 }
                 setInputError(initialInputError)
                 setInput(initialInput)
-
                 await userApi.updateUserInfoById(authUser.id, input)
                 fetchUser()
             }
@@ -48,7 +45,6 @@ export default function MyAddressPage() {
             console.log(error)
         }
     }
-
     return (
         <>
             <div className="min-h-[80vh] m-[60px]">

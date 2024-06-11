@@ -10,7 +10,6 @@ export default function ProductSneakerPage() {
         const fetchSneaker = async() => {
             try {
                 const res = await productApi.getProductByModel('SNEAKER')
-                console.log(res.data.modelProduct)
                 setModel(res.data.modelProduct)
             } catch (error) {
                 console.log(error)

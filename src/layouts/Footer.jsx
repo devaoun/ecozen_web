@@ -1,3 +1,4 @@
+import { LogoFacebook, LogoInstagram } from "../assets/icons/icon";
 
 export default function Footer() {
     return (
@@ -11,8 +12,8 @@ export default function Footer() {
                     </div>
                     <div className="">
                         <div>Let's get in touch!</div>
-                        <div className="font-light"><span className=" mr-[10px]">x</span>Facebook</div>
-                        <div className="font-light"><span className=" mr-[10px]">x</span>Instagram</div>
+                        <div className="font-light flex items-center"><div className=" mr-[10px]"><LogoFacebook className="w-8 h-fit"/></div>Facebook</div>
+                        <div className="font-light flex items-center"><div className=" mr-[10px]"><LogoInstagram className="w-8 f-fit"/></div>Instagram</div>
                     </div>
                 </div>
                 <div className=" h-fit text-[60px] font-bold">ECOZEN</div>

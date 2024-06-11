@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import productApi from '../apis/product'
 import { getAccessToken, getSelectedProduct } from '../utils/localStorage'
 import cartApi from '../apis/cart'
+import useCart from '../hooks/useCart'
 
 const allSize = [
     { size: 'US07' },
@@ -24,7 +25,8 @@ const allSize = [
 export default function ProductInfoPage() {
     const [selectedProduct, setSelectedProduct] = useState();
     const [selectedSize, setSelectedSize] = useState('US07');
-    const { authUser } = useAuth();
+    const { authUser,fetchUser } = useAuth();
+    const {fetchCartItem} = useCart();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -53,6 +55,7 @@ export default function ProductInfoPage() {
                         size: selectedSize
                     }
                     const res = await cartApi.createCartItem(data)
+                    fetchCartItem()
                     alert(res.data.message)
                 }
             }

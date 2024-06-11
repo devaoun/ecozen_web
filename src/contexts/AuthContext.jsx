@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { getAccessToken, removeAccessToken, removeSelectedProduct, setAccessToken } from "../utils/localStorage";
 import authApi from "../apis/auth";
+import cartApi from "../apis/cart";
 
 export const AuthContext = createContext();
 

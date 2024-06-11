@@ -7,8 +7,6 @@ export const ProductContext = createContext();
 export default function ProductContextProvider({ children }) {
     const [allProduct, setAllProduct] = useState(null)
     const [isAllProductLoading, setIsAllProductLoading] = useState(true)
-    // const [selectedProduct, setSelectedProduct] = useState(null);
-    // const [isSelectProductLoading , setIsSelectProductLoading] = useState(true)
 
     useEffect(() => {
         const fetchAllProduct = async () => {
@@ -27,8 +25,6 @@ export default function ProductContextProvider({ children }) {
     const selectProduct = async (productName) => {
         try {
             setSelectedProduct(productName)
-            // const res = await productApi.getProductById(productId)
-            // setSelectedProduct(res.data.selectedProduct)
         } catch (error) {
             console.log(error)
         }

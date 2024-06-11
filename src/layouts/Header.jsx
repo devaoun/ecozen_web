@@ -2,9 +2,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.png'
 import { IconCart, IconLogout } from '../assets/icons/icon'
 import useAuth from '../hooks/useAuth'
+import useCart from '../hooks/useCart';
 
 export default function Header() {
     const { authUser, logout } = useAuth();
+    const { cartItem } = useCart()
     const navigate = useNavigate()
     return (
         <>
@@ -16,7 +18,12 @@ export default function Header() {
                 <Link to='/' className='w-1/3 text-center text-[40px]'>ECOZEN</Link>
                 <div className='flex gap-[30px] w-1/3 justify-end items-center'>
                     <Link to={authUser ? '/profile' : '/auth'}><div className='h-fit w-fit hover:underline'>{authUser ? authUser?.username : 'login'}</div></Link>
-                    <Link to={authUser ? '/cart' : '/auth'}><IconCart className='w-[40px] h-[40px]' /></Link>
+                    <Link to={authUser ? '/cart' : '/auth'} className='relative'>
+                        <IconCart className='w-[40px] h-[40px]' />
+                        {cartItem.length > 0 ? <div className='absolute top-0 -right-1 w-[17px] h-[17px] text-white text-xs bg-red-500 rounded-full flex justify-center items-center'>{cartItem.length}</div>
+                            : null
+                        }
+                    </Link>
                     {authUser ? <button className='h-fit w-fit hover:underline' onClick={() => {
                         const isConfirm = confirm('Confirm log out?')
                         if (isConfirm) {

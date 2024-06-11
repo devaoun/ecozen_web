@@ -10,7 +10,6 @@ export default function ProductSportPage() {
             try {
                 window.scrollTo(0, 0);
                 const res = await productApi.getProductByModel('SPORT')
-                console.log(res.data.modelProduct)
                 setModel(res.data.modelProduct)
             } catch (error) {
                 console.log(error)

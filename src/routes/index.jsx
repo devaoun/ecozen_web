@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { lazy } from 'react'
 import AuthPage from "../pages/AuthPage";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
@@ -9,13 +8,13 @@ import ProductPage from "../pages/ProductPage";
 import ProductInfoPage from "../pages/ProductInfoPage";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ProductContextProvider from "../contexts/ProductContext";
-import ProtectedProduct from "../components/ProtectedProduct";
 import ProductSneakerPage from "../pages/ProductSneakerPage";
 import ProductSportPage from "../pages/ProductSportPage";
 import ProfilePage from "../pages/ProfilePage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import MyAddressPage from "../pages/MyAddressPage";
+import CartContextProvider from "../contexts/CartContext";
 
 
 
@@ -25,7 +24,9 @@ const router = createBrowserRouter([
         element: (
             <ProtectedRoute>
                 <ProductContextProvider>
-                    <MainContainer />
+                    <CartContextProvider>
+                        <MainContainer />
+                    </CartContextProvider>
                 </ProductContextProvider>
             </ProtectedRoute>
         ),
@@ -38,7 +39,8 @@ const router = createBrowserRouter([
             { path: '/profile', element: <ProfilePage /> },
             { path: '/cart', element: <CartPage /> },
             { path: '/checkout', element: <CheckoutPage /> },
-            {path:'/myAddress',element: <MyAddressPage/>}
+            { path: '/myAddress', element: <MyAddressPage /> },
+            // { path: '/order'}
         ]
     },
     {

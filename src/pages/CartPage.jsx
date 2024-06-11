@@ -3,31 +3,13 @@ import CartCard from "../components/CartCard";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import cartApi from "../apis/cart";
+import useCart from "../hooks/useCart";
 
 export default function CartPage() {
     const navigate = useNavigate();
     const { authUser } = useAuth();
-    const [cartItem, setCartItem] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
-
-    useEffect(() => {
-        const fetchCartItem = async () => {
-            if (!authUser?.id) return;
-            try {
-                const userId = authUser.id
-                const res = await cartApi.getCartItemByUserId(userId)
-                const data = res.data.reduce((acc, item) => {
-                    acc.push({ cartId: item.id, size: item.size, ...item.product })
-                    return acc
-                }, [])
-                console.log(data)
-                setCartItem(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchCartItem();
-    }, [authUser])
+    const {cartItem,setCartItem} = useCart()
 
     useEffect(() => {
         const sumPrice = cartItem.reduce((total, item) => total + (+item.price), 0);
@@ -35,7 +17,12 @@ export default function CartPage() {
     }, [cartItem]);
 
     const handleCheckout = () => {
-        navigate('/checkout')
+        if(!authUser?.address){
+            confirm('Please add your address before order.') ? navigate('/myAddress') : null
+        }
+        if(authUser?.address){
+            navigate('/checkout')
+        }
     }
 
     return (
@@ -45,7 +32,7 @@ export default function CartPage() {
                     <>
                         <div className="w-fit mx-auto mt-[50px] mb-[20px] text-[30px] font-bold">My cart</div>
                         <div className="flex justify-center gap-[100px] w-fit mx-auto">
-                            <div className="flex flex-col gap-[20px] mb-10">
+                            <div className="flex flex-col gap-[20px] mb-10 h-[70vh] overflow-y-auto p-2">
                                 {cartItem?.map(item =>
                                     <CartCard
                                         key={item.cartId}
