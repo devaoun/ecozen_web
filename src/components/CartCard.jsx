@@ -1,10 +1,13 @@
+import { toast } from 'react-toastify';
 import cartApi from '../apis/cart'
 
 export default function CartCard({color,cartId,productId,image,model,name,price,size,setCartItem}) {
     const handleDelete = async() => {
         try {
             const res = await cartApi.deleteCartItemByCartId(cartId);
-            alert(res.data.message);
+            toast.error(res.data.message,{
+                position:'top-left'
+            });
             setCartItem(prev => prev.filter(item => item.cartId !== cartId));
         } catch (error) {
             console.log(error)

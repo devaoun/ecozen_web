@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import useAuth from "../hooks/useAuth";
 import userApi from "../apis/user";
 import validateProfileInfo from "../validators/validate-info";
+import { toast } from "react-toastify";
 
 
 const initialInput = {
@@ -40,6 +41,7 @@ export default function MyAddressPage() {
                 setInput(initialInput)
                 await userApi.updateUserInfoById(authUser.id, input)
                 fetchUser()
+                toast.success('Updated info.')
             }
         } catch (error) {
             console.log(error)

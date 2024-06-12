@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/Logo.png'
 import authApi from '../apis/auth'
+import { toast } from 'react-toastify'
 
 
 
@@ -34,11 +35,12 @@ export default function RegisterPage() {
             const data = { email: email, ...input }
             const res = await authApi.register(data)
             if(res.data.message === 'register success'){
+                toast.success(res.data.message)
                 navigate('/login')
             }
         } catch (error) {
             console.log(error)
-            alert('invalid register')
+            toast.error('invalid register')
         }
     }
 

@@ -16,6 +16,9 @@ import CheckoutPage from "../pages/CheckoutPage";
 import MyAddressPage from "../pages/MyAddressPage";
 import CartContextProvider from "../contexts/CartContext";
 import ProtectUserRoute from "../components/ProtectUserRoute";
+import ProtectCheckoutRoute from "../components/ProtectCheckoutRoute";
+import OrderPage from "../pages/OrderPage";
+import OrderContextProvider from "../contexts/OrderContext";
 
 
 
@@ -45,9 +48,21 @@ const router = createBrowserRouter([
                 ), children: [
                     { path: 'profile', element: <ProfilePage /> },
                     { path: 'cart', element: <CartPage /> },
-                    { path: 'checkout', element: <CheckoutPage /> },
-                    { path: 'myAddress', element: <MyAddressPage /> }
-                    // { path: '/order'}
+                    {
+                        path: 'checkout', element: (
+                            <ProtectCheckoutRoute>
+                                <CheckoutPage />
+                            </ProtectCheckoutRoute>
+                        )
+                    },
+                    { path: 'myAddress', element: <MyAddressPage /> },
+                    {
+                        path: '/order', element: (
+                            <OrderContextProvider>
+                                <OrderPage />
+                            </OrderContextProvider>
+                        )
+                    }
                 ]
             },
 

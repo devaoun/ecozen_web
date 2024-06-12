@@ -8,6 +8,7 @@ import productApi from '../apis/product'
 import { getAccessToken, getSelectedProduct } from '../utils/localStorage'
 import cartApi from '../apis/cart'
 import useCart from '../hooks/useCart'
+import { toast } from 'react-toastify'
 
 const allSize = [
     { size: 'US07' },
@@ -26,7 +27,7 @@ export default function ProductInfoPage() {
     const [selectedProduct, setSelectedProduct] = useState();
     const [selectedSize, setSelectedSize] = useState('US07');
     const { authUser } = useAuth();
-    const {fetchCartItem} = useCart();
+    const { fetchCartItem } = useCart();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,18 +48,16 @@ export default function ProductInfoPage() {
                 confirm('Please login to add item to your cart.') ? navigate('/auth') : null
             }
             if (authUser) {
-                const isConfirm = confirm('Confirm add product to your cart?')
-                if (isConfirm) {
-                    const data = {
-                        userId: authUser.id,
-                        productId: selectedProduct.id,
-                        size: selectedSize
-                    }
-                    const res = await cartApi.createCartItem(data)
-                    fetchCartItem()
-                    alert(res.data.message)
+                const data = {
+                    userId: authUser.id,
+                    productId: selectedProduct.id,
+                    size: selectedSize
                 }
+                const res = await cartApi.createCartItem(data)
+                fetchCartItem()
+                toast.success('Added to cart.')
             }
+
         } catch (error) {
             console.log(error)
         }

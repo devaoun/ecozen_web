@@ -3,6 +3,7 @@ import logo from '../assets/Logo.png'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import Input from '../components/Input'
+import { toast } from 'react-toastify'
 
 export default function LoginPage() {
     const email = localStorage.getItem('email')
@@ -21,7 +22,8 @@ export default function LoginPage() {
             const data = { email: email, password: password }
             await login(data);
             navigate('/');
-            alert('login success');
+            toast.success('login success')
+            localStorage.removeItem('email')
         } catch (error) {
             console.log(error);
             setError('invalid password');

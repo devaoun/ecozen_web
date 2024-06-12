@@ -63,7 +63,7 @@ export default function CheckoutPage() {
       setLoading(false)
       if (file) {
         fetchCartItem()
-        navigate('/')
+        navigate('/order')
         }
     }
   }

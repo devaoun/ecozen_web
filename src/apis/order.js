@@ -3,6 +3,7 @@ import axios from "../config/axios"
 const orderApi = {}
 
 orderApi.createOrder = (data) => axios.post('order/newOrder/', data)
+orderApi.getUserOrder = (userId) => axios.get(`order/myOrder/${userId}`)
 
 export default orderApi
 // input = {
