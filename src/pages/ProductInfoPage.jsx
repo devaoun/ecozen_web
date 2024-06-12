@@ -25,7 +25,7 @@ const allSize = [
 export default function ProductInfoPage() {
     const [selectedProduct, setSelectedProduct] = useState();
     const [selectedSize, setSelectedSize] = useState('US07');
-    const { authUser,fetchUser } = useAuth();
+    const { authUser } = useAuth();
     const {fetchCartItem} = useCart();
     const navigate = useNavigate();
 

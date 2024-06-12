@@ -20,7 +20,9 @@ export default function Header() {
                     <Link to={authUser ? '/profile' : '/auth'}><div className='h-fit w-fit hover:underline'>{authUser ? authUser?.username : 'login'}</div></Link>
                     <Link to={authUser ? '/cart' : '/auth'} className='relative'>
                         <IconCart className='w-[40px] h-[40px]' />
-                        {cartItem.length > 0 ? <div className='absolute top-0 -right-1 w-[17px] h-[17px] text-white text-xs bg-red-500 rounded-full flex justify-center items-center'>{cartItem.length}</div>
+                        {cartItem.length > 0 ?
+                            <div className='absolute top-0 -right-1 w-[17px] h-[17px] text-white text-xs bg-red-500 rounded-full flex justify-center items-center'>{cartItem.length}
+                            </div>
                             : null
                         }
                     </Link>

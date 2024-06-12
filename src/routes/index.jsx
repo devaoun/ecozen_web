@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import AuthPage from "../pages/AuthPage";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
@@ -15,6 +15,7 @@ import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import MyAddressPage from "../pages/MyAddressPage";
 import CartContextProvider from "../contexts/CartContext";
+import ProtectUserRoute from "../components/ProtectUserRoute";
 
 
 
@@ -36,11 +37,20 @@ const router = createBrowserRouter([
             { path: 'product/productInfo', element: <ProductInfoPage /> },
             { path: '/product/sneaker', element: <ProductSneakerPage /> },
             { path: '/product/sport', element: <ProductSportPage /> },
-            { path: '/profile', element: <ProfilePage /> },
-            { path: '/cart', element: <CartPage /> },
-            { path: '/checkout', element: <CheckoutPage /> },
-            { path: '/myAddress', element: <MyAddressPage /> },
-            // { path: '/order'}
+            {
+                path: '', element: (
+                    <ProtectUserRoute>
+                        <Outlet />
+                    </ProtectUserRoute>
+                ), children: [
+                    { path: 'profile', element: <ProfilePage /> },
+                    { path: 'cart', element: <CartPage /> },
+                    { path: 'checkout', element: <CheckoutPage /> },
+                    { path: 'myAddress', element: <MyAddressPage /> }
+                    // { path: '/order'}
+                ]
+            },
+
         ]
     },
     {

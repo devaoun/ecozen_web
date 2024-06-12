@@ -12,7 +12,7 @@ export default function HomePage() {
             </Link>
             <div className=' bg-ec-home-gray flex flex-col p-[35px] h-fit'>
                 <div className=' opacity-50  w-fit font-normal mx-auto text-[20px]'>START SHOPPING</div>
-                <div className=' w-fit font-bold mx-auto my-[20px] text-[50px]'>CHOOSE A MODEL</div>
+                <div className=' w-fit font-bold mx-auto my-[20px] text-[40px]'>CHOOSE A MODEL</div>
                 <div className='w-[1000px] h-fit mx-auto my-[60px] flex justify-between'>
                     <Link to='/product/sneaker'>
                         <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70'>

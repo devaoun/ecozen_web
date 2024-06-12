@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import CartCard from "../components/CartCard";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import cartApi from "../apis/cart";
 import useCart from "../hooks/useCart";
 
 export default function CartPage() {

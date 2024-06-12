@@ -1,7 +1,5 @@
 
-export default function CheckoutItemCard({
-    image, cartId, name, size, model, price, color
-}) {
+export default function CheckoutItemCard({image, cartId, name, size, model, price, color}) {
     return (
         <>
             <div className=" flex w-full gap-[10px] p-[20px] border-2 rounded-[20px]">
