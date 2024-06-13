@@ -1,7 +1,6 @@
 import AuthContextProvider from "./contexts/AuthContext"
-import ProductContextProvider from "./contexts/ProductContext"
 import Router from "./routes"
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {

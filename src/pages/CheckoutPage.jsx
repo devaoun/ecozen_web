@@ -26,7 +26,6 @@ export default function CheckoutPage() {
   const handleConfirmPayment = async () => {
     try {
       setLoading(true)
-      console.log(cartItem)
       if (!file) {
         alert('Please upload your slip')
       }
@@ -35,11 +34,7 @@ export default function CheckoutPage() {
         formData.append('slip', file)
 
         const resSlip = await userApi.uploadSlip(formData)
-        console.log(resSlip.data.slip)
 
-        console.log(resSlip.data.slip)
-        console.log(authUser.id)
-        console.log(cartItem)
         const productInput = cartItem.reduce((acc, item) => {
           acc.push({
             productId: item.id,
@@ -55,7 +50,6 @@ export default function CheckoutPage() {
           product: productInput
         }
         const output = await orderApi.createOrder(data)
-        console.log(output.data.message)
       }
     } catch (error) {
       console.log(error)

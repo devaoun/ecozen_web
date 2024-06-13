@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         ),
         children: [
             { path: '/', element: <HomePage /> },
-            { path: '/product', element: (<ProductPage />) },
+            { path: '/product', element: <ProductPage /> },
             { path: 'product/productInfo', element: <ProductInfoPage /> },
             { path: '/product/sneaker', element: <ProductSneakerPage /> },
             { path: '/product/sport', element: <ProductSportPage /> },
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
                     },
                     { path: 'myAddress', element: <MyAddressPage /> },
                     {
-                        path: '/order', element: (
+                        path: 'order', element: (
                             <OrderContextProvider>
                                 <OrderPage />
                             </OrderContextProvider>
@@ -80,6 +80,7 @@ const router = createBrowserRouter([
         path: '/login',
         element: <LoginPage />
     },
+    
 ])
 
 export default function Router() {

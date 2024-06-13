@@ -3,7 +3,6 @@ import useOrder from "../hooks/useOrder";
 
 export default function OrderPage() {
     const { userOrder } = useOrder();
-    console.log(userOrder)
     return (
         <>
             <div className="min-h-[70vh] mb-[40px]">
