@@ -22,7 +22,6 @@ export default function CheckoutPage() {
     setTotalPrice(sumPrice)
   }, [cartItem])
 
-
   const handleConfirmPayment = async () => {
     try {
       setLoading(true)
@@ -49,7 +48,7 @@ export default function CheckoutPage() {
           userId: authUser.id,
           product: productInput
         }
-        const output = await orderApi.createOrder(data)
+        await orderApi.createOrder(data)
       }
     } catch (error) {
       console.log(error)
@@ -62,6 +61,11 @@ export default function CheckoutPage() {
     }
   }
 
+  const handleEdit = () => {
+    localStorage.setItem('PATH','/checkout')
+    navigate('/myAddress')
+  }
+
   return (
     <>
       {loading ? <Loading /> :
@@ -72,9 +76,9 @@ export default function CheckoutPage() {
               <div className="flex flex-col gap-[35px] p-[30px] border-2 h-fit rounded-[20px]">
                 <div className=" text-[30px] font-medium">Order Info</div>
                 <div className="flex flex-col gap-[30px] text-[20px] font-medium">
-                  <div className="flex justify-between">Subtotal : <span className=" font-bold">THB {totalPrice}</span></div>
+                  <div className="flex justify-between">Subtotal : <span className=" font-bold">THB {totalPrice.toLocaleString('en-US')}</span></div>
                   <div className="h-[1px] bg-ec-gray-d3d3d3" />
-                  <div className="flex justify-between">Total Payment : <span className=" font-bold text-2xl">THB {totalPrice}</span></div>
+                  <div className="flex justify-between">Total Payment : <span className=" font-bold text-2xl">THB {totalPrice.toLocaleString('en-US')}</span></div>
                 </div>
               </div>
             </div>
@@ -106,7 +110,7 @@ export default function CheckoutPage() {
               <div className=" text-[30px] font-semibold flex justify-between">
                 ที่อยู่ในการจัดส่ง
                 <span>
-                  <Link to='/MyAddress' className=" px-[40px] py-[10px] text-white bg-black rounded-full text-[15px] font-medium hover:opacity-80">Edit</Link>
+                  <button onClick={handleEdit} className=" px-[40px] py-[10px] text-white bg-black rounded-full text-[15px] font-medium hover:opacity-80">Edit</button>
                 </span>
               </div>
               <div className="border-2 w-full rounded-[20px] px-[30px] py-[10px] flex flex-col gap-[10px] text-[20px] font-normal">
@@ -120,7 +124,6 @@ export default function CheckoutPage() {
               <div className=" text-[30px] font-semibold">Upload slip</div>
               <input hidden type='file' ref={fileEl} onChange={e => {
                 if (e.target.files[0]) {
-                  console.log(e.target.files[0]);
                   setFile(e.target.files[0]);
                 }
               }} />

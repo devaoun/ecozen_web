@@ -24,11 +24,12 @@ const allSize = [
 //  userId = authUser?.id
 // productId = selectedProduct?.id
 export default function ProductInfoPage() {
-    const [selectedProduct, setSelectedProduct] = useState();
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [selectedSize, setSelectedSize] = useState('US07');
     const { authUser } = useAuth();
     const { fetchCartItem } = useCart();
     const navigate = useNavigate();
+    const getSelectProduct = getSelectedProduct()
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -41,7 +42,8 @@ export default function ProductInfoPage() {
             }
         }
         fetchSelectedProduct()
-    }, [])
+    }, [getSelectProduct])
+
     const handleAddToCart = async () => {
         try {
             if (!authUser) {
@@ -63,19 +65,21 @@ export default function ProductInfoPage() {
         }
     }
 
-    const handleClickBlack = async () => {
+    const handleClickWhite = async () => {
         try {
             const res = await productApi.getProductByName(getSelectedProduct())
-            setSelectedProduct(res.data.productName[1])
+            console.log(res.data.productName[0])
+            setSelectedProduct(res.data.productName[0])
         } catch (error) {
             console.log(error)
         }
     }
-
-    const handleClickWhite = async () => {
+    
+    const handleClickBlack = async () => {
         try {
             const res = await productApi.getProductByName(getSelectedProduct())
-            setSelectedProduct(res.data.productName[0])
+            console.log(res.data.productName[1])
+            setSelectedProduct(res.data.productName[1])
         } catch (error) {
             console.log(error)
         }
@@ -84,8 +88,8 @@ export default function ProductInfoPage() {
     return (
         <>
             <div className='flex justify-center items-center gap-[140px] h-[80vh]'>
-                <div className='w-[500px] h-[500px] bg-ec-home-gray flex justify-center items-center my-[40px] rounded-[20px]'>
-                    <img src={selectedProduct?.image || modelSneaker} />
+                <div className=' z-0 w-[500px] h-[500px] border-2 bg-ec-home-gray flex justify-center items-center my-[40px] rounded-[20px]'>
+                    <img src={selectedProduct?.image} className=' object-contain -z-10' />
                 </div>
                 <div className='h-fit flex flex-col gap-[30px]'>
                     <div className='flex flex-col gap-5'>

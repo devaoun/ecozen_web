@@ -37,7 +37,7 @@ export default function LoginPage() {
             </div>
             <div className='font-bold text-[60px] h-fit'>ECOZEN</div>
             <div className='mt-[20px] h-fit font-normal'>What's your password</div>
-            <div className=' underline decoration-1 h-fit font-normal'>{email}</div>
+            <div className=' underline decoration-1 h-fit font-normal mb-[30px]'>{email}</div>
             <form className=' flex flex-col items-center' onSubmit={handleSubmit}>
                 <Input
                     placeholder='Enter your password'

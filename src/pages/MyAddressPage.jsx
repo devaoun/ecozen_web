@@ -3,8 +3,7 @@ import useAuth from "../hooks/useAuth";
 import userApi from "../apis/user";
 import validateProfileInfo from "../validators/validate-info";
 import { toast } from "react-toastify";
-
-
+import {useNavigate} from 'react-router-dom'
 const initialInput = {
     firstname: '',
     lastname: '',
@@ -23,6 +22,12 @@ export default function MyAddressPage() {
     const [input, setInput] = useState(initialInput);
     const [inputError, setInputError] = useState(initialInputError)
     const { authUser, fetchUser } = useAuth();
+    const navigate = useNavigate()
+
+
+    useEffect(() => {
+        console.log(document.referrer)
+    }, [])
 
     const handleChangeInput = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value })

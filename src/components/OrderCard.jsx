@@ -21,7 +21,7 @@ export default function OrderCard({ orderNo, orderItems, status }) {
             <div className="flex flex-col bg-gray-100 border-2 rounded-lg h-fit hover:shadow-lg">
                 <div className="flex gap-[60px] w-full px-[40px] py-[20px] justify-center bg-white rounded-lg">
                     <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">{orderNo}</div>
-                    <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">{total}</div>
+                    <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">{total.toLocaleString('en-US')} ฿</div>
                     <div className={` text-[20px] font-normal w-[100px] h-[30px] flex justify-center text-gray-500
                     ${status === 'APPROVE' ? 'text-green-500' : null}`}>{status}</div>
                     <button className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center items-center" onClick={handleClickInfo}><IconArrowUp className={`w-[30px] h-[30px] ${!openInfo ? 'rotate-180' : null}`} /></button>

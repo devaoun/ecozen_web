@@ -22,6 +22,7 @@ export default function CartContextProvider({ children }) {
             console.log(error)
         }
     }
+    
     useEffect(() => {
         fetchCartItem();
     }, [authUser])

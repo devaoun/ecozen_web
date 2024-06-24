@@ -15,13 +15,13 @@ export default function HomePage() {
                 <div className=' w-fit font-bold mx-auto my-[20px] text-[40px]'>CHOOSE A MODEL</div>
                 <div className='w-[1000px] h-fit mx-auto my-[60px] flex justify-between'>
                     <Link to='/product/sneaker'>
-                        <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70'>
+                        <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70 rounded-3xl'>
                             <img src={modelSneaker} />
                             <div className=' text-[30px] w-fit h-fit font-extralight mx-auto'>SNEAKERS</div>
                         </button>
                     </Link>
                     <Link to='/product/sport'>
-                        <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70'>
+                        <button className='w-[400px] h-[300px] hover:shadow-2xl active:opacity-70 rounded-3xl'>
                             <img src={modelSport} />
                             <div className=' text-[30px] w-fit h-fit font-extralight mx-auto'>SPORTS</div>
                         </button>

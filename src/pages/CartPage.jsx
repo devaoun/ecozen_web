@@ -8,7 +8,7 @@ export default function CartPage() {
     const navigate = useNavigate();
     const { authUser } = useAuth();
     const [totalPrice, setTotalPrice] = useState(0)
-    const {cartItem,setCartItem} = useCart()
+    const { cartItem, setCartItem } = useCart()
 
     useEffect(() => {
         const sumPrice = cartItem.reduce((total, item) => total + (+item.price), 0);
@@ -16,10 +16,11 @@ export default function CartPage() {
     }, [cartItem]);
 
     const handleCheckout = () => {
-        if(!authUser?.address){
+        if (!authUser?.address) {
+            localStorage.setItem('nextPath','/checkout')
             confirm('Please add your address before order.') ? navigate('/myAddress') : null
         }
-        if(authUser?.address){
+        if (authUser?.address) {
             navigate('/checkout')
         }
     }
@@ -49,9 +50,9 @@ export default function CartPage() {
                             <div className="flex flex-col gap-[35px] p-[30px] border-2 h-fit rounded-[20px]">
                                 <div className=" text-[30px] font-medium">Order Info</div>
                                 <div className="flex flex-col gap-[30px] text-[20px] font-medium">
-                                    <div className="flex justify-between">Subtotal : <span className=" font-bold">THB {totalPrice}</span></div>
+                                    <div className="flex justify-between">Subtotal : <span className=" font-bold">THB {totalPrice.toLocaleString('en-US')}</span></div>
                                     <div className="h-[1px] bg-ec-gray-d3d3d3" />
-                                    <div className="flex justify-between">Total Payment : <span className=" font-bold text-2xl">THB {totalPrice}</span></div>
+                                    <div className="flex justify-between">Total Payment : <span className=" font-bold text-2xl">THB {totalPrice.toLocaleString('en-US')}</span></div>
                                 </div>
                                 <button className=' w-[500px] h-[60px] bg-black text-white text-[25px] font-normal rounded-[100px] hover:opacity-80' onClick={handleCheckout}>CHECKOUT</button>
                             </div>

@@ -46,7 +46,7 @@ export default function AuthPage() {
                 </div>
                 <div className='font-bold text-[60px] h-fit'>ECOZEN</div>
             </Link>
-            <div className='mt-[40px] h-fit font-normal'>Enter your email to join us or sign in.</div>
+            <div className='my-[30px] h-fit font-normal'>Enter your email to join us or sign in.</div>
             <form className=' flex flex-col items-center' onSubmit={handleSubmit}>
                 <Input
                     placeholder="Enter your email"

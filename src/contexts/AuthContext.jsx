@@ -36,10 +36,8 @@ export default function AuthContextProvider({ children }) {
     };
 
     const logout = () => {
-        removeAccessToken();
-        removeSelectedProduct();
         setAuthUser(null);
-        localStorage.removeItem('email')
+        localStorage.clear()
     }
 
     return (
