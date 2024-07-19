@@ -53,7 +53,7 @@ export default function LoginPage() {
                     <span className='underline decoration-1'>ข้อกำหนด​การใช้</span>
                     ของ Ecozen
                 </div>
-                <button className='mt-[20px] px-[60px] py-[25px] bg-gray-800 text-white text-[25px] font-normal rounded-[100px] hover:bg-gray-900'>COUNTINUE</button>
+                <button className='mt-[20px] px-[60px] py-[25px] bg-gray-800 text-white text-[25px] font-normal rounded-[100px] hover:bg-gray-900'>CONTINUE</button>
             </form>
         </div>
     )
