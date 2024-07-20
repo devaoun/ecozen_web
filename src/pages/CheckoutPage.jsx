@@ -7,6 +7,7 @@ import { LogoSCB } from '../assets/icons/icon';
 import userApi from '../apis/user';
 import orderApi from '../apis/order';
 import Loading from '../components/Loading';
+import Swal from 'sweetalert2';
 
 export default function CheckoutPage() {
   const { authUser } = useAuth();
@@ -26,7 +27,10 @@ export default function CheckoutPage() {
     try {
       setLoading(true)
       if (!file) {
-        alert('Please upload your slip')
+        Swal.fire({
+          title: "Please upload your slip.",
+          icon: 'warning'
+        });
       }
       if (file) {
         const formData = new FormData();

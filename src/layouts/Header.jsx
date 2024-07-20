@@ -7,29 +7,30 @@ import { useState } from 'react';
 import productApi from '../apis/product';
 import { toast } from 'react-toastify';
 import { setSelectedProduct } from '../utils/localStorage';
+import Swal from 'sweetalert2';
 
 export default function Header() {
     const { authUser, logout } = useAuth();
     const { cartItem } = useCart()
     const navigate = useNavigate()
-    const [searchInput , setSearchInput] = useState(null)
+    const [searchInput, setSearchInput] = useState(null)
 
     const handleChangeSearchInput = (e) => {
         setSearchInput(e.target.value)
     }
 
-    const handleSubmitSearch = async(e) => {
+    const handleSubmitSearch = async (e) => {
         e.preventDefault()
         try {
             console.log(searchInput)
             const res = await productApi.getProductByName(searchInput)
 
-            if(res.data.productName.length === 0){
-                toast.error(`no item ${searchInput}`,{
+            if (res.data.productName.length === 0) {
+                toast.error(`no item ${searchInput}`, {
                     position: 'top-left'
                 })
             }
-            if(res.data.productName.length > 0){
+            if (res.data.productName.length > 0) {
                 setSelectedProduct(searchInput);
                 navigate('/product/productInfo')
             }
@@ -48,8 +49,8 @@ export default function Header() {
                     <img src={logo} className='h-full' />
                     <Link to='/product' className=' z-20 h-fit my-auto hover:underline'>FOOTWARE</Link>
                     <form className='border-2 hover:border-gray-300 px-4 h-[50px]  rounded-xl flex items-center' onSubmit={handleSubmitSearch}>
-                        <input value={searchInput} onChange={handleChangeSearchInput} className=' outline-none h-full bg-transparent' placeholder='search'/>
-                        <button className={`${searchInput ? null : 'hidden'}`}><IconSearch className="h-[30px] z-50"/></button>
+                        <input value={searchInput} onChange={handleChangeSearchInput} className=' outline-none h-full bg-transparent' placeholder='search' />
+                        <button className={`${searchInput ? null : 'hidden'}`}><IconSearch className="h-[30px] z-50" /></button>
                     </form>
                 </div>
                 <Link to='/' className='w-fill text-center text-[40px]'>ECOZEN</Link>
@@ -63,14 +64,20 @@ export default function Header() {
                             : null
                         }
                     </Link>
-                    {authUser ? <button className='h-fit w-fit hover:underline' onClick={() => {
-                        const isConfirm = confirm('Confirm log out?')
-                        if (isConfirm) {
+                    {authUser && <button className='h-fit w-fit hover:underline' onClick={async () => {
+                        const result = await Swal.fire({
+                            title: 'Logout',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes',
+                            cancelButtonText: 'No'
+                        });
+
+                        if (result.isConfirmed) {
                             logout();
-                            navigate('/auth')
+                            navigate('/auth');
                         }
                     }}><IconLogout className="w-[40px] h-[40px]" /></button>
-                        : null
                     }
                 </div>
             </div>

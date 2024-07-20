@@ -3,6 +3,7 @@ import CartCard from "../components/CartCard";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
+import Swal from "sweetalert2";
 
 export default function CartPage() {
     const navigate = useNavigate();
@@ -17,13 +18,22 @@ export default function CartPage() {
 
     const handleCheckout = () => {
         if (!authUser?.address) {
-            localStorage.setItem('nextPath','/checkout')
-            confirm('Please add your address before order.') ? navigate('/myAddress') : null
+            Swal.fire({
+                title: 'Please add your address before order.',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/myAddress');
+                }
+            });
         }
         if (authUser?.address) {
-            navigate('/checkout')
+            navigate('/checkout');
         }
-    }
+    };
 
     return (
         <>

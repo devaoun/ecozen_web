@@ -3,6 +3,7 @@ import useOrder from "../hooks/useOrder";
 
 export default function OrderPage() {
     const { userOrder } = useOrder();
+    const sortedOrder = userOrder?.sort((orderA,orderB) => new Date(orderB.createdAt) - new Date(orderA.createdAt))
     return (
         <>
             <div className="min-h-[70vh] mb-[40px]">
@@ -14,7 +15,7 @@ export default function OrderPage() {
                         <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">Status</div>
                         <div className=" text-[20px] font-normal w-[100px] h-[30px] flex justify-center">Info</div>
                     </div>
-                    {userOrder?.map((item,index) => <OrderCard 
+                    {sortedOrder?.map((item,index) => <OrderCard 
                     key={item.id}
                     orderNo={item.id}
                     status={item.status}

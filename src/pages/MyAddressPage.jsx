@@ -3,7 +3,8 @@ import useAuth from "../hooks/useAuth";
 import userApi from "../apis/user";
 import validateProfileInfo from "../validators/validate-info";
 import { toast } from "react-toastify";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Swal from "sweetalert2";
 const initialInput = {
     firstname: '',
     lastname: '',
@@ -36,18 +37,26 @@ export default function MyAddressPage() {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault()
-            const isConfirm = confirm('Update your info?')
-            if (isConfirm) {
-                const error = validateProfileInfo(input);
-                if (error) {
-                    return setInputError(error)
+            Swal.fire({
+                title: 'Update your info?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const error = validateProfileInfo(input);
+                    if (error) {
+                        return setInputError(error)
+                    }
+                    setInputError(initialInputError)
+                    setInput(initialInput)
+                    await userApi.updateUserInfoById(authUser.id, input)
+                    fetchUser()
+                    toast.success('Updated info.')
                 }
-                setInputError(initialInputError)
-                setInput(initialInput)
-                await userApi.updateUserInfoById(authUser.id, input)
-                fetchUser()
-                toast.success('Updated info.')
-            }
+            })
+
         } catch (error) {
             console.log(error)
         }
